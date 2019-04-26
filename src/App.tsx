@@ -1,8 +1,9 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Router, Switch } from 'react-router-dom';
 
+import { history } from './app/store/configure-store';
 import About from './components/About';
 import Home from './components/Home';
 import logo from './logo.svg';
@@ -10,7 +11,7 @@ import logo from './logo.svg';
 class App extends Component {
   public render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
@@ -26,6 +27,10 @@ class App extends Component {
                 {' '}
                 <Link to="/about">About</Link>{' '}
               </li>
+              <li>
+                {' '}
+                <Link to="/about2">About2</Link>{' '}
+              </li>
             </ul>
           </div>
           <div className="App-intro">
@@ -36,7 +41,7 @@ class App extends Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

@@ -1,10 +1,14 @@
+import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
+import { combineReducers } from 'redux';
+
 import { CREATE_TODO, DELETE_TODO, MARK_TODO, TodoActionTypes, TodoState } from './types';
 
 const initialState: TodoState = {
   todos: []
 };
 
-export function todoReducer(state = initialState, action: TodoActionTypes): TodoState {
+function todoReducer(state = initialState, action: TodoActionTypes): TodoState {
   switch (action.type) {
     case CREATE_TODO:
       return {
@@ -28,3 +32,9 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
       return state;
   }
 }
+
+export default (history: History) =>
+  combineReducers({
+    router: connectRouter(history),
+    todoReducer
+  });

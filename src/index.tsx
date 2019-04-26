@@ -1,18 +1,21 @@
 import './index.css';
 
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import configureStore from './app/store/configure-store';
+import configureStore, { history } from './app/store/configure-store';
 import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
 
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>
 );
 
