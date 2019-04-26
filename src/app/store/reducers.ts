@@ -13,7 +13,7 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
     case MARK_TODO:
       return {
         todos: state.todos.map(todo => {
-          if (todo.id === action.payload.id) {
+          if (todo.timestamp === action.payload.timestamp) {
             todo.completed = action.payload.completed;
           }
 
@@ -22,7 +22,7 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
       };
     case DELETE_TODO:
       return {
-        todos: state.todos.filter(todo => todo.id !== action.payload.id)
+        todos: state.todos.filter(todo => todo.timestamp !== action.payload.timestamp)
       };
     default:
       return state;

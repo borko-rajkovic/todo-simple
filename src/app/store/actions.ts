@@ -8,21 +8,21 @@ export function createTodo(newTodo: Todo) {
   };
 }
 
-export function markTodo(id: number, completed: boolean) {
+export function markTodo(timestamp: Date, completed: boolean) {
   return {
     type: MARK_TODO,
     meta: {
-      id,
+      timestamp,
       completed
     }
   };
 }
 
-export function deleteTodo(id: number) {
+export function deleteTodo(timestamp: Date) {
   return {
     type: DELETE_TODO,
     payload: {
-      id
+      timestamp
     }
   };
 }

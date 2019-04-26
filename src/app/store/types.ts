@@ -16,7 +16,7 @@ interface CreateTodoAction {
 interface MarkTodoAction {
   type: typeof MARK_TODO;
   payload: {
-    id: number;
+    timestamp: Date;
     completed: boolean;
   };
 }
@@ -24,7 +24,7 @@ interface MarkTodoAction {
 interface DeleteTodoAction {
   type: typeof DELETE_TODO;
   payload: {
-    id: number;
+    timestamp: Date;
   };
 }
 
