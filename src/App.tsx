@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import { Link, Redirect, Route, Router, Switch } from 'react-router-dom';
+import { NavLink, Redirect, Route, Router, Switch } from 'react-router-dom';
 
 import { history } from './app/store/configure-store';
 import About from './components/About';
@@ -21,15 +21,27 @@ class App extends Component {
             <ul>
               <li>
                 {' '}
-                <Link to="/">Home</Link>{' '}
+                <NavLink to="/" activeStyle={{ color: 'red' }} exact={true}>
+                  All
+                </NavLink>{' '}
               </li>
               <li>
                 {' '}
-                <Link to="/about">About</Link>{' '}
+                <NavLink to="/about" activeStyle={{ color: 'red' }} exact={true}>
+                  Uncompleted
+                </NavLink>{' '}
               </li>
               <li>
                 {' '}
-                <Link to="/about2">About2</Link>{' '}
+                <NavLink to="/about2" activeStyle={{ color: 'red' }} exact={true}>
+                  Completed
+                </NavLink>{' '}
+              </li>
+              <li>
+                {' '}
+                <NavLink to="/about2" activeStyle={{ color: 'red' }} exact={true}>
+                  Make new
+                </NavLink>{' '}
               </li>
             </ul>
           </div>
