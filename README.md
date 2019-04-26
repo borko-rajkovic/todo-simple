@@ -37,8 +37,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run prettier`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Starts up prettier to go through all .ts and .tsx files.<br>Check more about prettier at [this](https://prettier.io/) link.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `npm run lint`
+
+Runs tslint and try to fix all linting errors. You can find out more about tslint at [this](https://palantir.github.io/tslint/) link.
