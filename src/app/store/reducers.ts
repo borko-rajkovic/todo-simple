@@ -1,6 +1,6 @@
 import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
-import { propEq, reject } from 'ramda';
+import { assoc, curry, map, propEq, reject, when } from 'ramda';
 import { combineReducers } from 'redux';
 
 import { Todo } from '../models/Todo';
@@ -13,6 +13,10 @@ export interface AppState {
   todos: Todo[];
 }
 
+// change property 'completed' to given value for given id in todos
+const markTodo = curry((value, id, todos) => map(when(propEq('id', id), assoc('completed', value)), todos));
+
+// return todos which don't have given id
 const deleteTodo = (id: number, state: Todo[]) => reject(propEq('id', id), state);
 
 export function todoReducer(state = initialState, action: TodoActionTypes): Todo[] {
@@ -28,13 +32,8 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
         ...state
       ];
     case MARK_TODO:
-      return state.map(todo => {
-        if (todo.id === action.payload.id) {
-          todo.completed = action.payload.completed;
-        }
-
-        return todo;
-      });
+      const { completed, id } = action.payload;
+      return markTodo(completed, id, state);
     case DELETE_TODO:
       return deleteTodo(action.payload.id, state);
     default:
