@@ -1,5 +1,3 @@
-import { Todo } from '../models/Todo';
-
 export const CREATE_TODO = 'CREATE_TODO';
 export const MARK_TODO = 'MARK_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
@@ -8,7 +6,6 @@ interface CreateTodoAction {
   type: typeof CREATE_TODO;
   payload: {
     text: string;
-    user: string;
   };
 }
 

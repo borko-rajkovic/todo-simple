@@ -17,20 +17,17 @@ describe('todos reducers', () => {
 
   it('should handle CREATE_TODO', () => {
     const text = 'New TODO in empty state';
-    const user = 'Borko';
 
     expect(
       todoReducer([], {
         type: CREATE_TODO,
         payload: {
-          text,
-          user
+          text
         }
       })
     ).toEqual([
       {
         text,
-        user,
         completed: false,
         id: 0,
         timestamp: new Date()
@@ -43,7 +40,6 @@ describe('todos reducers', () => {
           {
             text: 'One Todo already in state',
             completed: false,
-            user: 'Admin',
             timestamp: new Date(),
             id: 0
           }
@@ -51,8 +47,7 @@ describe('todos reducers', () => {
         {
           type: CREATE_TODO,
           payload: {
-            text: 'New Todo in state that is not empty',
-            user: 'Borko'
+            text: 'New Todo in state that is not empty'
           }
         }
       )
@@ -60,14 +55,12 @@ describe('todos reducers', () => {
       {
         text: 'New Todo in state that is not empty',
         completed: false,
-        user: 'Borko',
         timestamp: new Date(),
         id: 1
       },
       {
         text: 'One Todo already in state',
         completed: false,
-        user: 'Admin',
         timestamp: new Date(),
         id: 0
       }
@@ -76,14 +69,12 @@ describe('todos reducers', () => {
 
   it('should handle MARK_TODO', () => {
     const text = 'New TODO in empty state';
-    const user = 'Borko';
 
     expect(
       todoReducer(
         [
           {
             text,
-            user,
             completed: false,
             id: 0,
             timestamp: new Date()
@@ -100,7 +91,6 @@ describe('todos reducers', () => {
     ).toEqual([
       {
         text,
-        user,
         completed: true,
         id: 0,
         timestamp: new Date()
@@ -110,14 +100,12 @@ describe('todos reducers', () => {
 
   it('should handle DELETE_TODO', () => {
     const text = 'New TODO in empty state';
-    const user = 'Borko';
 
     expect(
       todoReducer(
         [
           {
             text,
-            user,
             completed: false,
             id: 0,
             timestamp: new Date()

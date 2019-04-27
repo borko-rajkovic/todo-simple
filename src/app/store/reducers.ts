@@ -20,8 +20,7 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
           id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
           completed: false,
           text: action.payload.text,
-          timestamp: new Date(),
-          user: action.payload.user
+          timestamp: new Date()
         },
         ...state
       ];

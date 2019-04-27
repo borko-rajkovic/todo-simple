@@ -4,7 +4,6 @@ import { CREATE_TODO, DELETE_TODO, MARK_TODO } from './types';
 describe('actions', () => {
   it('should create an action to add a todo', () => {
     const payload = {
-      user: 'User',
       text: 'Some text'
     };
 

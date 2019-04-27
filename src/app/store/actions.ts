@@ -1,7 +1,6 @@
-import { Todo } from '../models/Todo';
 import { CREATE_TODO, DELETE_TODO, MARK_TODO } from './types';
 
-export function createTodo(payload: { text: string; user: string }) {
+export function createTodo(payload: { text: string }) {
   return {
     type: CREATE_TODO,
     payload
