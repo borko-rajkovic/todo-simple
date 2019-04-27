@@ -3,12 +3,17 @@ import './App.css';
 import React, { Component } from 'react';
 import { NavLink, Redirect, Route, Router, Switch } from 'react-router-dom';
 
-import AllTodos from './app/pages/AllTodos';
-import CompletedTodos from './app/pages/CompletedTodos';
+import ListTodos from './app/pages/ListTodos';
 import MakeNewTodo from './app/pages/MakeNewTodo';
-import UncompletedTodos from './app/pages/UncompletedTodos';
 import { history } from './app/store/configure-store';
 import logo from './logo.svg';
+
+export enum Routes {
+  all = '/all',
+  uncompleted = '/uncompleted',
+  completed = '/completed',
+  makeNew = '/make-new'
+}
 
 class App extends Component {
   public render() {
@@ -23,25 +28,25 @@ class App extends Component {
             <ul>
               <li>
                 {' '}
-                <NavLink to="/all" activeStyle={{ color: 'red' }} exact={true}>
+                <NavLink to={Routes.all} activeStyle={{ color: 'red' }} exact={true}>
                   All
                 </NavLink>{' '}
               </li>
               <li>
                 {' '}
-                <NavLink to="/uncompleted" activeStyle={{ color: 'red' }} exact={true}>
+                <NavLink to={Routes.uncompleted} activeStyle={{ color: 'red' }} exact={true}>
                   Uncompleted
                 </NavLink>{' '}
               </li>
               <li>
                 {' '}
-                <NavLink to="/completed" activeStyle={{ color: 'red' }} exact={true}>
+                <NavLink to={Routes.completed} activeStyle={{ color: 'red' }} exact={true}>
                   Completed
                 </NavLink>{' '}
               </li>
               <li>
                 {' '}
-                <NavLink to="/make-new" activeStyle={{ color: 'red' }} exact={true}>
+                <NavLink to={Routes.makeNew} activeStyle={{ color: 'red' }} exact={true}>
                   Make new
                 </NavLink>{' '}
               </li>
@@ -49,12 +54,11 @@ class App extends Component {
           </div>
           <div className="App-content">
             <Switch>
-              <Route exact path="/" component={AllTodos} />
-              <Route path="/all" component={AllTodos} />
-              <Route path="/uncompleted" component={UncompletedTodos} />
-              <Route path="/completed" component={CompletedTodos} />
-              <Route path="/make-new" component={MakeNewTodo} />
-              <Redirect to="/" />
+              <Route path={Routes.all} component={ListTodos} />
+              <Route path={Routes.completed} component={ListTodos} />
+              <Route path={Routes.uncompleted} component={ListTodos} />
+              <Route path={Routes.makeNew} component={MakeNewTodo} />
+              <Redirect to={Routes.all} />
             </Switch>
           </div>
         </div>
