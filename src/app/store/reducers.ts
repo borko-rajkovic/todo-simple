@@ -1,33 +1,31 @@
-import { connectRouter } from 'connected-react-router';
+import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers } from 'redux';
 
-import { CREATE_TODO, DELETE_TODO, MARK_TODO, TodoActionTypes, TodoState } from './types';
+import { Todo } from '../models/Todo';
+import { CREATE_TODO, DELETE_TODO, MARK_TODO, TodoActionTypes } from './types';
 
-const initialState: TodoState = {
-  todos: []
-};
+const initialState: Todo[] = [];
 
-function todoReducer(state = initialState, action: TodoActionTypes): TodoState {
+export interface AppState {
+  router: RouterState;
+  todos: Todo[];
+}
+
+function todoReducer(state = initialState, action: TodoActionTypes): Todo[] {
   switch (action.type) {
     case CREATE_TODO:
-      return {
-        todos: [...state.todos, action.payload]
-      };
+      return [...state, action.payload];
     case MARK_TODO:
-      return {
-        todos: state.todos.map(todo => {
-          if (todo.timestamp === action.payload.timestamp) {
-            todo.completed = action.payload.completed;
-          }
+      return state.map(todo => {
+        if (todo.timestamp === action.payload.timestamp) {
+          todo.completed = action.payload.completed;
+        }
 
-          return todo;
-        })
-      };
+        return todo;
+      });
     case DELETE_TODO:
-      return {
-        todos: state.todos.filter(todo => todo.timestamp !== action.payload.timestamp)
-      };
+      return state.filter(todo => todo.timestamp !== action.payload.timestamp);
     default:
       return state;
   }
@@ -36,5 +34,5 @@ function todoReducer(state = initialState, action: TodoActionTypes): TodoState {
 export default (history: History) =>
   combineReducers({
     router: connectRouter(history),
-    todoReducer
+    todos: todoReducer
   });
