@@ -6,13 +6,16 @@ export const DELETE_TODO = 'DELETE_TODO';
 
 interface CreateTodoAction {
   type: typeof CREATE_TODO;
-  payload: Todo;
+  payload: {
+    text: string;
+    user: string;
+  };
 }
 
 interface MarkTodoAction {
   type: typeof MARK_TODO;
   payload: {
-    timestamp: Date;
+    id: number;
     completed: boolean;
   };
 }
@@ -20,7 +23,7 @@ interface MarkTodoAction {
 interface DeleteTodoAction {
   type: typeof DELETE_TODO;
   payload: {
-    timestamp: Date;
+    id: number;
   };
 }
 

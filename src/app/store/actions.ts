@@ -1,28 +1,23 @@
 import { Todo } from '../models/Todo';
 import { CREATE_TODO, DELETE_TODO, MARK_TODO } from './types';
 
-export function createTodo(newTodo: Todo) {
+export function createTodo(payload: { text: string; user: string }) {
   return {
     type: CREATE_TODO,
-    payload: newTodo
+    payload
   };
 }
 
-export function markTodo(timestamp: Date, completed: boolean) {
+export function markTodo(payload: { id: number; completed: boolean }) {
   return {
     type: MARK_TODO,
-    meta: {
-      timestamp,
-      completed
-    }
+    payload
   };
 }
 
-export function deleteTodo(timestamp: Date) {
+export function deleteTodo(payload: { id: number }) {
   return {
     type: DELETE_TODO,
-    payload: {
-      timestamp
-    }
+    payload
   };
 }

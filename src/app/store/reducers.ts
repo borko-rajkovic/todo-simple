@@ -12,20 +12,29 @@ export interface AppState {
   todos: Todo[];
 }
 
-function todoReducer(state = initialState, action: TodoActionTypes): Todo[] {
+export function todoReducer(state = initialState, action: TodoActionTypes): Todo[] {
   switch (action.type) {
     case CREATE_TODO:
-      return [...state, action.payload];
+      return [
+        {
+          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+          completed: false,
+          text: action.payload.text,
+          timestamp: new Date(),
+          user: action.payload.user
+        },
+        ...state
+      ];
     case MARK_TODO:
       return state.map(todo => {
-        if (todo.timestamp === action.payload.timestamp) {
+        if (todo.id === action.payload.id) {
           todo.completed = action.payload.completed;
         }
 
         return todo;
       });
     case DELETE_TODO:
-      return state.filter(todo => todo.timestamp !== action.payload.timestamp);
+      return state.filter(todo => todo.id !== action.payload.id);
     default:
       return state;
   }
