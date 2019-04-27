@@ -1,5 +1,6 @@
 import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
+import { propEq, reject } from 'ramda';
 import { combineReducers } from 'redux';
 
 import { Todo } from '../models/Todo';
@@ -11,6 +12,8 @@ export interface AppState {
   router: RouterState;
   todos: Todo[];
 }
+
+const deleteTodo = (id: number, state: Todo[]) => reject(propEq('id', id), state);
 
 export function todoReducer(state = initialState, action: TodoActionTypes): Todo[] {
   switch (action.type) {
@@ -33,7 +36,7 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
         return todo;
       });
     case DELETE_TODO:
-      return state.filter(todo => todo.id !== action.payload.id);
+      return deleteTodo(action.payload.id, state);
     default:
       return state;
   }
