@@ -5,10 +5,13 @@ const localStorageItemName = 'todo-simple-state';
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem(localStorageItemName);
+
     if (serializedState === null) {
       return undefined;
     }
-    return JSON.parse(serializedState);
+    const toReturn = JSON.parse(serializedState);
+    delete toReturn.router;
+    return toReturn;
   } catch (err) {
     return undefined;
   }
