@@ -9,7 +9,13 @@ import { Todo } from '../../models/Todo';
 import { deleteTodo, markTodo } from '../../store/actions';
 
 const TodoComponent = memo(
-  (props: { todo: Todo; divider: boolean; checkTodo: typeof markTodo; removeTodo: typeof deleteTodo }) => (
+  (props: {
+    todo: Todo;
+    divider: boolean;
+    checkTodo: typeof markTodo;
+    removeTodo: typeof deleteTodo;
+    openSnackbar: any;
+  }) => (
     <ListItem divider={props.divider}>
       <Checkbox
         onClick={() => props.checkTodo({ id: props.todo.id, completed: !props.todo.completed })}
@@ -22,7 +28,13 @@ const TodoComponent = memo(
         classes={{ primary: classNames({ strike: props.todo.completed }) }}
       />
       <ListItemSecondaryAction>
-        <IconButton aria-label="Delete Todo" onClick={() => props.removeTodo({ id: props.todo.id })}>
+        <IconButton
+          aria-label="Delete Todo"
+          onClick={() => {
+            props.openSnackbar();
+            props.removeTodo({ id: props.todo.id });
+          }}
+        >
           <Delete />
         </IconButton>
       </ListItemSecondaryAction>
