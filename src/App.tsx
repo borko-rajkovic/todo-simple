@@ -20,12 +20,6 @@ export enum Routes {
   about = '/about'
 }
 
-// function LinkTab(props: { label: string; href: string }) {
-//   return <Tab component="a" onClick={event => event.preventDefault()} {...props} />;
-// }
-
-// const MyLink = (props: { to: string }) => <NavLink {...props} />;
-
 class App extends Component {
   public render() {
     return (

@@ -35,6 +35,9 @@ function ButtonAppBar(props: Props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Simple React Todo App
           </Typography>
+          <Button color="inherit" onClick={() => props.history.push(Routes.all)}>
+            Todos
+          </Button>
           <Button color="inherit" onClick={() => props.history.push(Routes.about)}>
             About
           </Button>
