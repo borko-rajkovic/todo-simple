@@ -3,6 +3,8 @@ import Delete from '@material-ui/icons/Delete';
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 
+import classNames from 'classnames';
+
 import { Todo } from '../../models/Todo';
 import { deleteTodo, markTodo } from '../../store/actions';
 
@@ -16,7 +18,7 @@ const TodoComponent = memo(
         checked={props.todo.completed}
         disableRipple
       />
-      <ListItemText primary={props.todo.text} />
+      <ListItemText primary={props.todo.text} className={classNames({ strike: props.todo.completed })} />
       <ListItemSecondaryAction>
         <IconButton aria-label="Delete Todo" onClick={() => props.removeTodo({ id: props.todo.id })}>
           <Delete />
