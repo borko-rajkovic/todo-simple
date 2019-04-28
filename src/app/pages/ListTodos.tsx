@@ -42,7 +42,7 @@ const getVisibleTodos = (todos: Todo[], ownProps: { location: Location }): Todo[
 
 const mapStateToProps = (state: AppState, ownProps: { location: Location }) => {
   return {
-    todos: getVisibleTodos(state.todos, ownProps)
+    todos: getVisibleTodos(state.todos.present, ownProps)
   };
 };
 

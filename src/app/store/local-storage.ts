@@ -19,6 +19,7 @@ export const loadState = () => {
 
 export const saveState = (state: AppState) => {
   try {
+    delete state.todos.history;
     const serializedState = JSON.stringify(state);
     localStorage.setItem(localStorageItemName, serializedState);
   } catch {}

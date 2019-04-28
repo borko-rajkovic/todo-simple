@@ -1,6 +1,8 @@
 import { Button, IconButton, List, Paper, Snackbar, Theme, withStyles } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import React, { memo, useState } from 'react';
+import { connect } from 'react-redux';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 import { Todo } from '../../models/Todo';
 import TodoComponent from './TodoComponent';
@@ -11,7 +13,7 @@ const styles = (theme: Theme) => ({
   }
 });
 
-const TodoList = memo((props: { items: Todo[]; classes: Record<'close', string> }) => {
+const TodoList = memo((props: { items: Todo[]; classes: Record<'close', string>; onUndo: () => { type: string } }) => {
   const [open, setOpen] = useState(false);
   const { classes } = props;
 
@@ -54,7 +56,15 @@ const TodoList = memo((props: { items: Todo[]; classes: Record<'close', string> 
         }}
         message={<span id="message-id">Todo deleted</span>}
         action={[
-          <Button key="undo" color="secondary" size="small" onClick={handleClose}>
+          <Button
+            key="undo"
+            color="secondary"
+            size="small"
+            onClick={event => {
+              handleClose(event);
+              props.onUndo();
+            }}
+          >
             UNDO
           </Button>,
           <IconButton key="close" aria-label="Close" color="inherit" className={classes.close} onClick={handleClose}>
@@ -66,4 +76,11 @@ const TodoList = memo((props: { items: Todo[]; classes: Record<'close', string> 
   );
 });
 
-export default withStyles(styles)(memo(TodoList));
+const mapDispatchToProps = {
+  onUndo: UndoActionCreators.undo
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(memo(TodoList)));

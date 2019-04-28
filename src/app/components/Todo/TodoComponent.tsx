@@ -5,6 +5,8 @@ import React, { memo } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
+
 import { Todo } from '../../models/Todo';
 import { deleteTodo, markTodo } from '../../store/actions';
 
@@ -15,6 +17,7 @@ const TodoComponent = memo(
     checkTodo: typeof markTodo;
     removeTodo: typeof deleteTodo;
     openSnackbar: () => void;
+    onUndo: () => { type: string };
   }) => (
     <ListItem divider={props.divider}>
       <Checkbox
@@ -44,7 +47,8 @@ const TodoComponent = memo(
 
 const mapDispatchToProps = {
   checkTodo: markTodo,
-  removeTodo: deleteTodo
+  removeTodo: deleteTodo,
+  onUndo: UndoActionCreators.undo
 };
 
 export default connect(

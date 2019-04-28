@@ -4,7 +4,7 @@ import { applyMiddleware, createStore, Middleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { loadState, saveState } from './local-storage';
-import createRootReducer from './reducers';
+import createRootReducer, { AppState } from './reducers';
 
 export const history = createBrowserHistory();
 
@@ -20,7 +20,7 @@ export default function configureStore() {
   const store = createStore(createRootReducer(history), persistedState, composedEnhancers);
 
   store.subscribe(() => {
-    saveState(store.getState());
+    saveState(store.getState() as AppState);
   });
 
   return store;

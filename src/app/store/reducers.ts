@@ -2,6 +2,7 @@ import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
 import { add, assoc, compose, map, max, pluck, prepend, propEq, reduce, reject, when } from 'ramda';
 import { combineReducers } from 'redux';
+import undoable from 'redux-undo';
 
 import { Todo } from '../models/Todo';
 import { CREATE_TODO, DELETE_TODO, MARK_TODO, TodoActionTypes } from './types';
@@ -10,7 +11,12 @@ const initialState: Todo[] = [];
 
 export interface AppState {
   router: RouterState;
-  todos: Todo[];
+  todos: {
+    future: Todo[][];
+    past: Todo[][];
+    present: Todo[];
+    history?: any;
+  };
 }
 
 // these functions are called in order
@@ -62,5 +68,5 @@ export function todoReducer(state = initialState, action: TodoActionTypes): Todo
 export default (history: History) =>
   combineReducers({
     router: connectRouter(history),
-    todos: todoReducer
+    todos: undoable(todoReducer)
   });
