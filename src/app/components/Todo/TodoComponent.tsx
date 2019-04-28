@@ -14,7 +14,7 @@ const TodoComponent = memo(
     divider: boolean;
     checkTodo: typeof markTodo;
     removeTodo: typeof deleteTodo;
-    openSnackbar: any;
+    openSnackbar: () => void;
   }) => (
     <ListItem divider={props.divider}>
       <Checkbox
