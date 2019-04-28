@@ -1,11 +1,12 @@
 import './App.css';
 
-import { AppBar, Paper, Toolbar, Typography } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { ConnectedRouter } from 'connected-react-router';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { NavLink, Redirect, Route, Router, Switch } from 'react-router-dom';
 
+import AppBarComponent from './app/components/AppBarComponent';
 import About from './app/pages/About';
 import ListTodos from './app/pages/ListTodos';
 import configureStore, { history } from './app/store/configure-store';
@@ -32,18 +33,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Router history={history}>
             <Paper elevation={0} style={{ padding: 0, margin: 0, backgroundColor: '#fafafa' }}>
-              <AppBar color="primary" position="static" style={{ height: 64 }}>
-                <Toolbar style={{ height: 64 }}>
-                  <Typography variant="h5" color="inherit">
-                    Simple React Todo App
-                  </Typography>
-                </Toolbar>
-                {/* <Tabs variant="fullWidth" value={0}>
-                  <LinkTab label="Page One" href="page1" />
-                  <LinkTab label="Page Two" href="page2" />
-                  <LinkTab label="Page Three" href="page3" />
-                </Tabs> */}
-              </AppBar>
+              <AppBarComponent history={history} />
               <Switch>
                 <Route path={Routes.all} component={ListTodos} />
                 <Route path={Routes.completed} component={ListTodos} />
@@ -73,15 +63,8 @@ class App extends Component {
                       Completed
                     </NavLink>{' '}
                   </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.about} activeStyle={{ color: 'red' }} exact={true}>
-                      About
-                    </NavLink>{' '}
-                  </li>
                 </ul>
               </div>
-              <div className="App-content" />
             </div>
           </Router>
         </ConnectedRouter>
