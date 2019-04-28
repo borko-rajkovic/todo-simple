@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Routes } from '../../App';
+import TabsComponent from '../components/TabsComponent';
 import AddTodo from '../components/Todo/AddTodo';
 import TodoList from '../components/Todo/TodoList';
 import { Todo } from '../models/Todo';
@@ -17,6 +18,7 @@ export class ListTodos extends Component<IProps> {
   public render() {
     return (
       <div>
+        <TabsComponent route={this.props.location.pathname as Routes} />
         <AddTodo />
         <TodoList items={this.props.todos} />
       </div>

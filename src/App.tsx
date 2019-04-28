@@ -4,7 +4,7 @@ import { Paper } from '@material-ui/core';
 import { ConnectedRouter } from 'connected-react-router';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { NavLink, Redirect, Route, Router, Switch } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 
 import AppBarComponent from './app/components/AppBarComponent';
 import About from './app/pages/About';
@@ -36,30 +36,6 @@ class App extends Component {
                 <Redirect to={Routes.all} />
               </Switch>
             </Paper>
-            <div className="App">
-              <div className="menu">
-                <ul>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.all} activeStyle={{ color: 'red' }} exact={true}>
-                      All
-                    </NavLink>{' '}
-                  </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.uncompleted} activeStyle={{ color: 'red' }} exact={true}>
-                      Uncompleted
-                    </NavLink>{' '}
-                  </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.completed} activeStyle={{ color: 'red' }} exact={true}>
-                      Completed
-                    </NavLink>{' '}
-                  </li>
-                </ul>
-              </div>
-            </div>
           </Router>
         </ConnectedRouter>
       </Provider>
