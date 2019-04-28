@@ -1,8 +1,8 @@
 import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
 import classNames from 'classnames';
-import moment from 'moment';
 import React, { memo } from 'react';
+import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
 import { Todo } from '../../models/Todo';
@@ -18,7 +18,7 @@ const TodoComponent = memo(
       />
       <ListItemText
         primary={props.todo.text}
-        secondary={moment(props.todo.timestamp).fromNow()}
+        secondary={<Moment fromNow>{+new Date(props.todo.timestamp)}</Moment>}
         classes={{ primary: classNames({ strike: props.todo.completed }) }}
       />
       <ListItemSecondaryAction>
