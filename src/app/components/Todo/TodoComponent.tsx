@@ -1,14 +1,12 @@
 import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
+import classNames from 'classnames';
+import moment from 'moment';
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 
-import classNames from 'classnames';
-
 import { Todo } from '../../models/Todo';
 import { deleteTodo, markTodo } from '../../store/actions';
-
-// TODO: add momentjs for timestamp of todo
 
 const TodoComponent = memo(
   (props: { todo: Todo; divider: boolean; checkTodo: typeof markTodo; removeTodo: typeof deleteTodo }) => (
@@ -18,7 +16,11 @@ const TodoComponent = memo(
         checked={props.todo.completed}
         disableRipple
       />
-      <ListItemText primary={props.todo.text} className={classNames({ strike: props.todo.completed })} />
+      <ListItemText
+        primary={props.todo.text}
+        secondary={moment(props.todo.timestamp).fromNow()}
+        classes={{ primary: classNames({ strike: props.todo.completed }) }}
+      />
       <ListItemSecondaryAction>
         <IconButton aria-label="Delete Todo" onClick={() => props.removeTodo({ id: props.todo.id })}>
           <Delete />
