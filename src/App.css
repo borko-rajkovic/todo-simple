@@ -50,3 +50,7 @@ ul {
   color: #fff;
   display: block;
 }
+
+.strike {
+  text-decoration: line-through;
+}

@@ -1,14 +1,15 @@
 import './App.css';
 
+import { Paper } from '@material-ui/core';
 import { ConnectedRouter } from 'connected-react-router';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { NavLink, Redirect, Route, Router, Switch } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 
+import AppBarComponent from './app/components/AppBarComponent';
+import About from './app/pages/About';
 import ListTodos from './app/pages/ListTodos';
-import MakeNewTodo from './app/pages/MakeNewTodo';
 import configureStore, { history } from './app/store/configure-store';
-import logo from './logo.svg';
 
 const store = configureStore();
 
@@ -16,7 +17,7 @@ export enum Routes {
   all = '/all',
   uncompleted = '/uncompleted',
   completed = '/completed',
-  makeNew = '/make-new'
+  about = '/about'
 }
 
 class App extends Component {
@@ -25,49 +26,16 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Router history={history}>
-            <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Welcome to React</h1>
-              </header>
-              <div className="menu">
-                <ul>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.all} activeStyle={{ color: 'red' }} exact={true}>
-                      All
-                    </NavLink>{' '}
-                  </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.uncompleted} activeStyle={{ color: 'red' }} exact={true}>
-                      Uncompleted
-                    </NavLink>{' '}
-                  </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.completed} activeStyle={{ color: 'red' }} exact={true}>
-                      Completed
-                    </NavLink>{' '}
-                  </li>
-                  <li>
-                    {' '}
-                    <NavLink to={Routes.makeNew} activeStyle={{ color: 'red' }} exact={true}>
-                      Make new
-                    </NavLink>{' '}
-                  </li>
-                </ul>
-              </div>
-              <div className="App-content">
-                <Switch>
-                  <Route path={Routes.all} component={ListTodos} />
-                  <Route path={Routes.completed} component={ListTodos} />
-                  <Route path={Routes.uncompleted} component={ListTodos} />
-                  <Route path={Routes.makeNew} component={MakeNewTodo} />
-                  <Redirect to={Routes.all} />
-                </Switch>
-              </div>
-            </div>
+            <Paper elevation={0} style={{ padding: 0, margin: 0, backgroundColor: '#fafafa' }}>
+              <AppBarComponent history={history} />
+              <Switch>
+                <Route path={Routes.all} component={ListTodos} />
+                <Route path={Routes.completed} component={ListTodos} />
+                <Route path={Routes.uncompleted} component={ListTodos} />
+                <Route path={Routes.about} component={About} />
+                <Redirect to={Routes.all} />
+              </Switch>
+            </Paper>
           </Router>
         </ConnectedRouter>
       </Provider>
